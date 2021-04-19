@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :books
   resources :orders
   resources :book_orders
+  resources :cart
   root 'books#index'
 
   devise_for :users, controllers: {

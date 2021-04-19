@@ -1,0 +1,45 @@
+<div class='row h-100'>
+  <div class='col-sm-8 py-4'>
+    <h5>Order details</h5>
+    <table class="table table-striped">
+      <thead class='table-dark'>
+        <tr>
+          <th>Book name</th>
+          <th class='col-2'>Quantity</th>
+          <th class='col-2'>Price</th>
+          <th class='col-1'>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |book|%>
+          <% book_quantity = @cart.count(book.id) %>
+          <tr>
+            <td><%= link_to book.name, book%></td>
+            <td>
+              <%= form_with do |f| %>
+                <div class="input-group">
+                  <%# <%= button_to '-', increase_quantity(book.id), class:"btn btn-outline-secondary btn-sm"%>
+                  <%= button_tag "-", class:"btn btn-outline-secondary btn-sm", name: 'reduce'%>
+                  <%= f.text_field :title, value: book_quantity, class: 'form-control' %>
+                  <%= button_tag "+", class:"btn btn-outline-secondary btn-sm", name: 'increment' %>
+                </div>
+              <%end%>
+            </td>
+            <td>
+              <%= "$ #{(book.price * book_quantity)}"%>
+            </td>
+            <td>
+              <%= form_with url: cart_path(book.id), method: :delete do%>
+                <%= button_tag "X", class:"btn btn-danger btn-sm" %>
+              <%end%>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+  <div class='col-sm-3 bg-light  py-4'>
+    <h5>User details</h5>
+    <%%>
+  </div>
+</div>
