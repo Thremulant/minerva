@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html class='h-100'>
   <head>
-    <title>Minerva</title>
+    <title>Base</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <%= yield %>
+  <body class='h-100'>
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand text-light" href='/'>Minerva</a>
+        <div class="d-flex ">
+          <%# <a class="btn btn-outline-warning me-2" href='/characters'><strong>Characters</strong></a>
+          <a class="btn btn-outline-warning me-2" href='/planets'><strong>Planets</strong></a>
+          <a class="btn btn-outline-warning me-2" href='/races'><strong>Species</strong></a> %>
+          <%# <%= show_svg('shopping-bag.svg') %>
+          <a class="btn btn-light me-2" href="/cart"><strong>Cart</strong>
+          </a>
+          <a class="btn btn-outline-info" href='/about'>About</a>
+        </div>
+      </div>
+    </nav>
+    <div class='container-fluid bg-dark'>
+      <div class='container p-1 mv-breadcrumbs'>
+        <%= render_breadcrumbs :separator => ' / ' %>
+      </div>
+    </div>
+    <%# <div class='container-fluid bg-danger'>
+      <div class='container p-1 mv-breadcrumbs'>
+        <%= debug session[:cart] %>
+    <%# </div> %>
+    <%# </div> %>
+    <div class='container p-0 h-100'>
+      <%= yield %>
+    </div>
   </body>
 </html>

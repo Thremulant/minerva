@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :genres
+  root 'books#index'
+  resources :books
+
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

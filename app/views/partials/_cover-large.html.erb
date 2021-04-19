@@ -1,0 +1,7 @@
+<div class="mv-cover-img-large">
+  <% if book.image != '' %>
+    <%= image_tag book.image, :class => 'img-fluid' %>
+  <% else %>
+    <%= image_tag ("/images/no_cover.jpg"), :class => 'img-fluid' %>
+  <% end %>
+</div>

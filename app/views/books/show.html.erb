@@ -1,0 +1,23 @@
+<div class='row h-100 pt-4'>
+  <div class='col-3'>
+    <%= render partial:'partials/cover-large', locals:{book:@book}%>
+    <div class='d-flex justify-content-center pt-4'>
+      <%= link_to 'Edit', edit_admin_book_path(@book), class: "btn btn-light btn-sm me-2" %>
+      <%= link_to 'Back', books_path, class: "btn btn-primary btn-sm"%>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class='d-flex flex-row flex-nowrap'>
+      <% if !@book.genre.nil? then%><span class="badge rounded-pill bg-primary me-2"><%= @book.genre.name %></span><%end%>
+      <% if @book.new then %><span class="badge rounded-pill bg-warning">NEW</span><%end%>
+    </div>
+    <h2 ><%= @book.title %></h2>
+    <h6 ><strong>Price: </strong><%= @book.price %></h6>
+    <h6 ><strong>Pages: </strong><%= @book.pages %></h6>
+    <p><strong>Description: </strong><br/>
+      <%= @book.description %>
+    </p>
+    <div class='d-flex justify-flex-start mb-3'>
+    </div>
+  </div>
+</div>

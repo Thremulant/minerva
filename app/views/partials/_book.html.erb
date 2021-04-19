@@ -1,0 +1,21 @@
+<div class="col mt-0 mb-4">
+  <div class="card" >
+    <a href="<%= book_path(book) %>" class="link-dark">
+      <div class="mv-cover-img">
+        <% if book.image != '' %>
+          <%= image_tag book.image, :class => 'img-fluid' %>
+        <% else %>
+          <%= image_tag ("/images/no_cover.jpg"), :class => 'img-fluid' %>
+        <% end %>
+      </a>
+    </div>
+    <div class="card-body">
+      <% if !book.genre.nil? then%><span class="badge rounded-pill bg-primary"><%= book.genre.name %></span><%end%>
+      <a href="<%= book_path(book) %>" class="link-dark">
+        <h5 class="card-title"><%= book.title %></h5>
+      </a>
+    </div>
+    <div class='d-flex justify-content-center mb-3'>
+    </div>
+  </div>
+</div>
