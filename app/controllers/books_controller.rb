@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all.includes(:author, :genre)
     @q = @books.ransack(params[:q])
-    @search = @q.result.order(:new).page(params[:page]).per(20)
+    @search = @q.result.includes(:genre, :author).order(:new).page(params[:page]).per(20)
 
     @genres = Genre.all
   end
