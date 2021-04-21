@@ -16,9 +16,12 @@
           <% if user_signed_in? then %>
             <h6 class=' me-2 text-light'><%= current_user.name %></h6>
           <% end %>
-          <a class="btn btn-light me-2" href="/cart"><strong>Cart</strong>
-          </a>
-          <%# <a class="btn btn-outline-info me-2" href='/about'>About</a> %>
+          <%= link_to cart_index_path, class:'btn btn-light text-primary me-2' do %>
+            Cart
+            <% if session[:cart].size > 0 %>
+              <span class="badge bg-danger"> <%= session[:cart].size %></span>
+            <%end%>
+          <% end%>
           <% if user_signed_in? then %>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'btn btn-outline-info' %>
           <% else %>
@@ -32,13 +35,11 @@
         <%= render_breadcrumbs :separator => ' / ' %>
       </div>
     </div>
-    <%# <div class='container-fluid bg-danger'>
-      <div class='container p-1 mv-breadcrumbs'>
-        <%= debug session[:cart] %>
-    <%# </div> %>
-    <%# </div> %>
     <div class='container p-0 h-100'>
       <%= yield %>
     </div>
   </body>
+  <script>
+    setTimeout("$('.flash-alert').fadeOut('slow')", 5000)
+  </script>
 </html>

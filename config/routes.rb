@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  root 'books#index'
   resources :genres
   resources :books
   resources :orders
   resources :book_orders
-  resources :cart
-  root 'books#index'
+  get '/cart', to: 'cart#index', as: 'cart_index'
+  post '/cart/:id', to: 'cart#create', as: 'cart_create'
+  delete '/cart/:id', to: 'cart#destroy', as: 'cart_delete'
+  patch '/cart/:id', to: 'cart#patch', as: 'cart_reduce'
 
   devise_for :users, controllers: {
     registrations: 'users/registration'

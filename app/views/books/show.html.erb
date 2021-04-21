@@ -18,6 +18,7 @@
       <%= @book.description %>
     </p>
     <div class='d-flex justify-flex-start mb-3'>
+      <%= button_to "$#{@book.price}", cart_create_path(@book.id), method: :post, class:"btn btn-primary" %>
     </div>
   </div>
 </div>

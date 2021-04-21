@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+
   def index
     @books = Book.all.includes(:author, :genre)
     @q = @books.ransack(params[:q])

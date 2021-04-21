@@ -14,32 +14,50 @@
         <% @items.each do |book|%>
           <% book_quantity = @cart.count(book.id) %>
           <tr>
-            <td><%= link_to book.name, book%></td>
+            <td><%= link_to book.title, book%></td>
             <td>
-              <%= form_with do |f| %>
-                <div class="input-group">
-                  <%# <%= button_to '-', increase_quantity(book.id), class:"btn btn-outline-secondary btn-sm"%>
-                  <%= button_tag "-", class:"btn btn-outline-secondary btn-sm", name: 'reduce'%>
-                  <%= f.text_field :title, value: book_quantity, class: 'form-control' %>
-                  <%= button_tag "+", class:"btn btn-outline-secondary btn-sm", name: 'increment' %>
+              <div class="d-flex flex-row input-group justify-content-center align-items-center">
+                <div class='col'><%= button_to  "-", cart_reduce_path(book.id), method: :patch, class:"btn btn-outline-secondary btn-sm" %></div>
+                <div class='col me-2'>
+                  <%= form_with do |f| %>
+                    <%= f.text_field :title, value: book_quantity, class: 'form-control col' %>
+                  <%end%>
                 </div>
-              <%end%>
+                <div class='col'><%= button_to  "+", cart_create_path(book.id), method: :post, class:"btn btn-outline-secondary btn-sm col" %></div>
+              </div>
             </td>
             <td>
-              <%= "$ #{(book.price * book_quantity)}"%>
+              <%= "$ #{book_quantity * book.price}"%>
             </td>
             <td>
-              <%= form_with url: cart_path(book.id), method: :delete do%>
-                <%= button_tag "X", class:"btn btn-danger btn-sm" %>
-              <%end%>
+              <%= button_to 'X', cart_delete_path(book.id), method: :delete, class:"btn btn-danger btn-sm"  %>
             </td>
           </tr>
         <%end%>
       </tbody>
     </table>
+    <div >
+      <%= get_total() %>
+    </div>
+    <div class='col-sm-3 bg-light  py-4'>
+      <h5 class='mb-4'>User details</h5>
+      <% if user_signed_in? then %>
+        <div class='mb-4'>
+          <h6 class='mb-0 text-secondary'>Name:</h6>
+          <h5><%= current_user.name %></h5>
+        </div>
+        <div class='mb-4'>
+          <h6 class='mb-0 text-secondary'>Address:</h6>
+          <h5><%= current_user.address %></h5>
+        </div>
+        <div class='mb-4'>
+          <h6 class='mb-0 text-secondary'>Postal Code:</h6>
+          <h5><%= current_user.address %></h5>
+        </div>
+        <div class='mb-4'>
+          <h6 class='mb-0 text-secondary'>Province:</h6>
+          <h5><%= current_user.province.name %></h5>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class='col-sm-3 bg-light  py-4'>
-    <h5>User details</h5>
-    <%%>
-  </div>
-</div>

@@ -1,4 +1,13 @@
 <div class='row h-100'>
+  <% if flash.any? then%>
+    <div class='flash-alert col-12'>
+      <% flash.each do |type, msg| %>
+        <div class="alert <%= 'alert-success' if type == 'success' %>">
+          <%= msg %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <div class='col-sm-3 bg-light  py-4'>
     <div class='mb-5'>
       <h4>Search</h4>
