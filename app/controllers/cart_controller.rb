@@ -1,6 +1,5 @@
 class CartController < ApplicationController
   helper_method :get_total
-  add_flash_types :info, :error, :warning, :success
   def create
     id = params[:id].to_i
     session[:cart] << id
@@ -13,7 +12,7 @@ class CartController < ApplicationController
 
     session[:cart].delete(id)
     # session[:cart].reject{|k| k == id}
-    redirect_to request.referrer
+    redirect_to request.referrer, error: 'The book was removed from the cart'
   end
 
   def patch
@@ -39,10 +38,10 @@ class CartController < ApplicationController
     cart.each do |id|
       quantity = cart.count(id)
       book = Book.find(id)
-      prices << (book.price * quantity)
+      tmp = book.price * quantity
+      prices << tmp
     end
-
-    Rails.logger.debug(prices)
+    # flash.now[:success] = prices
     prices.reduce(0, :+)
   end
 end
